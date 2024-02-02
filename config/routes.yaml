@@ -3,3 +3,10 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+comment:
+    path: /comment
+    controller: App\Controller\CommentController::index
+
+post:
+    path: /post
+    controller: App\Controller\PostController::index

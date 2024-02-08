@@ -6,21 +6,32 @@ use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\Pagination\PaginationInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/post')]
 class PostController extends AbstractController
 {
-    #[Route('/', name: 'app_post_index', methods: ['GET'])]
-    public function index(PostRepository $postRepository, Request $request, PaginationInterface $pagination): Response
-    {
-        $donnees = $this->$postRepository->findBy(['publishedDate' => 'desc']);
+    private $entityManager;
+    private $paginator;
 
-        $posts = $pagination->paginate(
+    public function __construct(EntityManagerInterface $entityManager, PaginatorInterface $paginator)
+    {
+        $this->entityManager = $entityManager;
+        $this->paginator = $paginator;
+    }
+
+    #[Route('/', name: 'app_post_index', methods: ['GET'])]
+    public function index(PostRepository $postRepository, Request $request): Response
+    {
+        
+        //$donnees = $this->$postRepository->findBy(['publishedDate' => 'desc']);
+        $donnees = $postRepository->findAll();
+
+        $posts = $this->paginator->paginate(
             $donnees,
             $request->query->getInt('page', 1),
             4

@@ -1,19 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Post index{% endblock %}
+{% block title %}Liste des posts{% endblock %}
 
 {% block body %}
-    <h1>Post index</h1>
+<div class="container mt-2">
+    <a href="/home"><button type="button" class="btn btn-primary"><- Retour</button></a>
+    <h1>Liste des posts</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Author</th>
-                <th>PublishedDate</th>
-                <th>actions</th>
+                <th>Titre</th>
+                <th>Contenue</th>
+                <th>Auteur</th>
+                <th>Date</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -24,14 +26,16 @@
                 <td>{{ post.content }}</td>
                 <td>{{ post.author }}</td>
                 <td>{{ post.publishedDate ? post.publishedDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_post_show', {'id': post.id}) }}">show</a>
-                    <a href="{{ path('app_post_edit', {'id': post.id}) }}">edit</a>
+                <td class="d-flex justify-content-around">
+                {{post.slug}}
+                    <a href="{{ path('app_post_show', {'slug': post.title}) }}"><div class="btn btn-primary">Voir</div></a>
+                    <a href="{{ path('app_post_edit', {'slug': post.title}) }}"><div class="btn btn-success">Modifier</div></a>
+                    <a href="{{ path('app_post_delete', {'slug': post.title}) }}"><div class="btn btn-danger">Suprimer</div></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Rien à afficher</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -40,5 +44,6 @@
     <div id="test">
     {{ knp_pagination_render(posts) }}
     </div>
-    <a href="{{ path('app_post_new') }}">Create new</a>
+    <a href="{{ path('app_post_new') }}"><button type="button" class="btn btn-primary">+ Créer un nouveau</button></a>
+</div>
 {% endblock %}

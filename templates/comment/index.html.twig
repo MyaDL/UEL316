@@ -3,16 +3,18 @@
 {% block title %}Comment index{% endblock %}
 
 {% block body %}
-    <h1>Comment index</h1>
+<div class="container mt-2">
+    <a href="/home"><button type="button" class="btn btn-primary"><- Retour</button></a>
+    <h1>Liste des commentaires</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Content</th>
-                <th>Author</th>
-                <th>PublishedDate</th>
-                <th>actions</th>
+                <th>Contenue</th>
+                <th>Auteur</th>
+                <th>Date</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,17 +25,19 @@
                 <td>{{ comment.author }}</td>
                 <td>{{ comment.publishedDate ? comment.publishedDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_comment_show', {'id': comment.id}) }}">show</a>
-                    <a href="{{ path('app_comment_edit', {'id': comment.id}) }}">edit</a>
+                    <a href="{{ path('app_comment_show', {'id': comment.id}) }}"><div class="btn btn-primary">Voir</div></a>
+                    <a href="{{ path('app_comment_edit', {'id': comment.id}) }}"><div class="btn btn-success">Modifier</div></a>
+                    <a href="{{ path('app_comment_delete', {'id': comment.id}) }}"><div class="btn btn-danger">Suprimer</div></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Rien à afficher</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_comment_new') }}">Create new</a>
+    <a href="{{ path('app_comment_new') }}"><button type="button" class="btn btn-primary">+ Créer un nouveau</div></a>
+</div>
 {% endblock %}

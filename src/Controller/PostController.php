@@ -33,14 +33,12 @@ class PostController extends AbstractController
     #[Route('/', name: 'app_post_index', methods: ['GET'])]
     public function index(PostRepository $postRepository, Request $request): Response
     {
-        
-        //$donnees = $this->$postRepository->findBy(['publishedDate' => 'desc']);
         $donnees = $postRepository->findAll();
 
         $posts = $this->paginator->paginate(
             $donnees,
             $request->query->getInt('page', 1),
-            4
+            10
         );
         return $this->render('post/index.html.twig', [
             'posts' => $posts,

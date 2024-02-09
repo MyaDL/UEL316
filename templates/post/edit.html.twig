@@ -1,13 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Post{% endblock %}
+{% block title %}Modifier post{% endblock %}
 
 {% block body %}
-    <h1>Edit Post</h1>
+<div class="container">
+    <h1>Modifier post</h1>
 
-    {{ include('post/_form.html.twig', {'button_label': 'Update'}) }}
+     {{ include('post/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_post_index') }}">back to list</a>
+    <div class="d-flex justify-content-between">
+        <a href="/post"><button type="button" class="btn btn-primary"><- Retour</button></a>
+        {{ include('post/_delete_form.html.twig') }}
+    </div>
 
-    {{ include('post/_delete_form.html.twig') }}
+
+</div>
 {% endblock %}

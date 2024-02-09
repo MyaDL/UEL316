@@ -41,6 +41,7 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/comment, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/post, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/home, roles: ROLE_USER }
 
 when@test:
     security:

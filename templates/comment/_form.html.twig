@@ -1,4 +1,8 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.content, {'attr': {'class': 'form-control'}}) }}
+    {{ form_row(form.author, {'attr': {'class': 'form-control'}}) }}
+    {{ form_row(form.publishedDate, {'attr': {'class': 'form-control'}}) }}
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-success mt-2">{{ button_label|default(' + Ajouter') }}</button>
+    </div>
 {{ form_end(form) }}

@@ -6,7 +6,17 @@ controllers:
 comment:
     path: /comment
     controller: App\Controller\CommentController::index
-
 post:
     path: /post
     controller: App\Controller\PostController::index
+app_post_edit:
+    path: /post/{slug}/edit
+    controller: App\Controller\PostController::edit
+    methods: ['GET', 'POST']   
+app_post_delete:
+    path: /post/{slug}
+    controller: App\Controller\PostController::delete
+    methods: ['POST']
+index_redirect:
+    path: /
+    controller: App\Controller\RedirectController::indexRedirect

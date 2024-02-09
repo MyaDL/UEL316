@@ -38,6 +38,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_comment_new') }}"><button type="button" class="btn btn-primary">+ Créer un nouveau</div></a>
+    <div id="pagination">
+        {{ knp_pagination_render(comments) }}
+    </div>
+
+    <a href="{{ path('app_comment_new') }}"><button type="button" class="btn btn-primary">+ Créer un nouveau</button></a>
 </div>
 {% endblock %}

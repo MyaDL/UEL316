@@ -5,8 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\User;
+use App\Repository\CommentRepository;
+use App\Repository\PostRepository;
+use App\Repository\UserRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Menu\SectionMenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,26 +16,28 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+    private $commentRepository;
+    private $userRepository;
+    private $postRepository;
+    public function __construct(CommentRepository $commentRepository,PostRepository $postRepository,UserRepository $userRepository)
+    {
+        $this->commentRepository = $commentRepository;
+        $this->postRepository = $postRepository;
+        $this->userRepository = $userRepository;
+    }
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        //return parent::index();
 
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
+        $users = $this->userRepository->findBy([], ['id' => 'DESC'], 3);
+        $comments = $this->commentRepository->findBy([], ['createdAt' => 'DESC'], 3);
+        $posts = $this->postRepository->findBy([], ['createdAt' => 'DESC'], 3);
 
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
-
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-         return $this->render('admin/index.html.twig');
+        return $this->render('admin/index.html.twig', [
+            'users' => $users,
+            'comments' => $comments,
+            'posts' => $posts,
+        ]);
     }
 
     public function configureDashboard(): Dashboard
@@ -45,9 +49,11 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-
+        yield MenuItem::section('Blog');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Post', 'fas fa-message', Post::class);
         yield MenuItem::linkToCrud('Comment', 'fas fa-list', Comment::class);
+        yield MenuItem::section('');
+        yield MenuItem::linkToLogout('Logout', 'fas fa-sign-out');
     }
 }

@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
@@ -22,6 +21,12 @@ class Comment
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $publishedDate = null;
+
+    public function __construct()
+    {
+        // Auto-set published date to current date and time when a new Post object is created
+        $this->publishedDate = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

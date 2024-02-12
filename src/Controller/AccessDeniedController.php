@@ -12,6 +12,6 @@ class AccessDeniedController extends AbstractController
     #[Route('/access-denied', name: 'access_denied')]
     public function index(): RedirectResponse
     {
-        return new RedirectResponse($this->generateUrl('home'));
+        return new RedirectResponse($this->generateUrl('app_home'));
     }
 }

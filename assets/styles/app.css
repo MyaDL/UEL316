@@ -6,6 +6,10 @@ a{
     text-decoration: none;
 }
 
+tr {
+    vertical-align: middle;
+}
+
 #nav_home{
     width: 300px;
 }

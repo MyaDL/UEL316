@@ -12,4 +12,10 @@ class RedirectController
     {
         return new RedirectResponse('/login');
     }
+
+    #[Route('/admin', name: 'home_redirect')]
+    public function homeRedirect(): RedirectResponse
+    {
+        return new RedirectResponse('/home');
+    }
 }

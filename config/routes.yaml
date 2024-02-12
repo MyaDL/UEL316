@@ -20,3 +20,6 @@ app_post_delete:
 index_redirect:
     path: /
     controller: App\Controller\RedirectController::indexRedirect
+home_redirect:
+    path: /admin
+    controller: App\Controller\RedirectController::homeRedirect

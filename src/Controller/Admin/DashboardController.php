@@ -30,8 +30,8 @@ class DashboardController extends AbstractDashboardController
     {
 
         $users = $this->userRepository->findBy([], ['id' => 'DESC'], 3);
-        $comments = $this->commentRepository->findBy([], ['createdAt' => 'DESC'], 3);
-        $posts = $this->postRepository->findBy([], ['createdAt' => 'DESC'], 3);
+        $comments = $this->commentRepository->findBy([], ['publishedDate' => 'DESC'], 3);
+        $posts = $this->postRepository->findBy([], ['publishedDate' => 'DESC'], 3);
 
         return $this->render('admin/index.html.twig', [
             'users' => $users,

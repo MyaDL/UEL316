@@ -5,3 +5,32 @@ body {
 #nav_home{
     width: 300px;
 }
+
+.pagination{
+    margin-bottom: 20px;
+}
+
+.pagination a{
+    color: #aaaaaa;
+}
+
+.pagination .current{
+    padding: 5px;
+    background: #0d6efd;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 5px;
+}
+
+.pagination .page{
+    padding: 5px;
+    color: #aaa !important;
+    margin-right: 5px;
+}
+
+.pagination .next, .pagination .last, .pagination .first, .pagination .previous{
+    background: #d5d5d5;
+    padding: 5px;
+    color: #aaa !important;
+    margin-right: 5px;
+}

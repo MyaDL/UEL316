@@ -11,6 +11,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Image</th>
                 <th>Titre</th>
                 <th>Contenue</th>
                 <th>Auteur</th>
@@ -22,11 +23,12 @@
         {% for post in posts %}
             <tr>
                 <td>{{ post.id }}</td>
+                <td><img src='{{ asset('images/' ~ post.image) }}' width="80" height="80" alt"Image"></td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.content }}</td>
                 <td>{{ post.author }}</td>
                 <td>{{ post.publishedDate ? post.publishedDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td class="d-flex justify-content-around">
+                <td>
                 {{post.slug}}
                     <a href="{{ path('app_post_show', {'slug': post.title}) }}"><div class="btn btn-primary">Voir</div></a>
                     <a href="{{ path('app_post_edit', {'slug': post.title}) }}"><div class="btn btn-success">Modifier</div></a>

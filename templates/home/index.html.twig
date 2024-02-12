@@ -12,7 +12,7 @@
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="/admin" class="text-center me-2"><button type="button" class="btn btn-warning">Pannel d'administration</button></a>
                 {% endif %}
-                <a href="/logout" class="text-center"><button type="button" class="btn btn-danger">Se déconnecté</button></a> 
+                <a href="/logout" class="text-center m-auto"><button type="button" class="btn btn-danger">Se déconnecté</button></a> 
             </div>
             <span class="text-center">{{ app.user.email }}</span>
             <div class="d-flex mt-2 justify-content-between mt-4" id="nav_home">

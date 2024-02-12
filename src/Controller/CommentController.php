@@ -29,7 +29,7 @@ class CommentController extends AbstractController
         $comments = $this->paginator->paginate(
             $donnees,
             $request->query->getInt('page', 1),
-            20
+            10
         );
 
         return $this->render('comment/index.html.twig', [
